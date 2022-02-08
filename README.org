@@ -1,0 +1,5 @@
+#+TITLE: Theorical self-study on Algorithms.
+
+*** Studies of
+- Alexander Shen - Algorithms and Programming (2010, Springer, Ed. 2)
+- Kernighan, Brian; Wilson, Ritchie; Dennis M., The C programming language (1988, Prentice-Hall)
