@@ -1,0 +1,15 @@
+#+TITLE: The Language
+
+* Chapter 1
+#+begin_src c :tangle programs/hello.c
+include <stdio.h>
+
+main()
+{
+printf("hello, world\n");
+}
+#+end_src
+
+#+begin_src shell
+cc hello.c
+#+end_src
