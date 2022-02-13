@@ -22,3 +22,92 @@ main() {
   printf("Final:(b := t)\t a=%d \t b=%d\n", a, b);
 }
 #+end_src
+** Calculating powers
+*** The folding algorithm
+Think of the power =n= as a line/thin-paper segment. Now you can fold it symmetrically every time =n= is a even integer. If it is of off size, take one unity-of-measurment (u.m.) off, then fold it.
+
+So, we have sequences of the kind:
+
+17, 16, 8, 4, 2, 1, 0.
+19, 18, 9, 8, 4, 2, 1, 0.
+30, 15, 14, 7, 6, 3, 2, 1, 0.
+
+If we want to couple a map that has, at the end of the process, the measure =n=,
+we can use multiplication.
+
+\begin{equation}
+\begin{aligned}
+17, 16, 8, 4, 2, 1, 0.  &\rightarrow  1, 2, 4, 8, 16, 17, 17.\\
+                  &\rightarrow  a^1, a^2, a^4, a^8, a^{16}, a^{17}.
+\end{aligned}
+\end{equation}
+
+if $n$ odd -> increase one exponential ($c^k*c:\, b*c$); decrease $n$.
+if $n$ even -> double the exponent ($c^k*c^k: c*c$); decrease $n$ in half.
+
+=Notation:=
+- $c^k$, on the left is the current state of the exponentiation.
+- $$
+
+=C*log(n)= algorithm.
+
+#+begin_example
+k := n; b := 1; c := a;
+{a^n = b * (c^k)}
+while k <> 0 do begin
+    if k mod 2 = 0 then begin
+        k := k div 2;
+        c := c*c;
+    end else begin
+        k := k - 1;
+        b := b * c;
+    end;
+end;
+#+end_example
+*** The C folding algorithm
+#+begin_src c :tangle programs/exp-folding.c
+#include <stdio.h>
+
+main()
+{
+    int a,b,c;
+    a=7,b=1,c=3; // 3^7
+    while (a != 0) {
+        if ( a % 2 == 0 ) {
+            a = a/2;
+            c = c*c;
+        } else {
+            a = a-1;
+            b = b*c;
+        }
+    }
+    printf("3^7 = %d \n", b);
+}
+#+end_src
+*** The Go folding algorithm
+
+#+begin_src go :tangle programs/exp-folding.go
+package main
+
+import (
+	"fmt"
+	// "math"
+)
+
+func main() {
+	a := 7
+	b := 1
+	c := 3
+
+	for i := 7; i >= 0; i = i-1 {
+		if a%2==0 {
+			a = a/2
+			c = c*c
+		} else {
+			a = a-1
+			b = b*c
+		}
+	}
+	fmt.Println("3^7 = ", b)
+}
+#+end_src

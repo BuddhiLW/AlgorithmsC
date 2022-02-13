@@ -2,7 +2,7 @@
 
 * Chapter 1
 #+begin_src c :tangle programs/hello.c
-include <stdio.h>
+#include <stdio.h>
 
 main()
 {
