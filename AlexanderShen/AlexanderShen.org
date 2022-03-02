@@ -24,6 +24,15 @@ main() {
 }
 #+end_src
 **** TODO With Go
+**** With Haskell
+#+begin_src haskell :tangle programs/change-values.hs
+chvar :: (a,b) -> (b,a)
+chvar a b =  (b,a)
+#+end_src
+
+#+begin_src haskell :tangle programs/change-values.hs
+chvar (sin,5)
+#+end_src
 *** Without auxiliary variable (linear combination)
 #+begin_src c :tangle programs/change-values-noaux.c
 #include <stdio.h>
